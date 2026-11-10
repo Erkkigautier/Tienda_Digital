@@ -1,0 +1,570 @@
+/*
+ * styles.css — UrbanShop
+ * Tema visual (colores, tipografía, botones, tarjetas) y layout de escritorio.
+ * El layout para celular está en mobile.css.
+ *
+ * Fuentes (cargadas desde Google Fonts en cada página):
+ *   Permanent Marker → logo
+ *   Anton            → títulos
+ *   Noto Sans        → texto
+ */
+
+:root {
+  --ink: #111111;
+  --ink-soft: #2a2a2a;
+  --paper: #f5f3ee;
+  --white: #ffffff;
+  --muted: #6b6b6b;
+  --line: #dedad2;
+  --accent: #ff4d2e;
+  --accent-dark: #d93a1d;
+  --success: #1f9d55;
+  --danger: #d64545;
+
+  --font-logo: "Permanent Marker", "Comic Sans MS", cursive;
+  --font-title: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --font-body: "Noto Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --radius: 10px;
+  --shadow: 0 8px 24px rgba(17, 17, 17, 0.08);
+  --shadow-hover: 0 14px 32px rgba(17, 17, 17, 0.16);
+}
+
+/* ---------- Base ---------- */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1rem; font-weight: 700; }
+
+a {
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Imagen que aún no existe: se ve un bloque neutro en lugar de un hueco */
+img {
+  background: linear-gradient(135deg, #d9d5cc, #c4bfb4);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Botones y campos ---------- */
+button,
+.button {
+  display: inline-block;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 26px;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+button:hover,
+.button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+button:active,
+.button:active {
+  transform: translateY(1px);
+}
+
+button a {
+  color: inherit;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+.data {
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 11px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+.data:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(255, 77, 46, 0.25);
+  outline: none;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ---------- Navbar ---------- */
+nav {
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+nav .logo {
+  font-family: var(--font-logo);
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--white);
+}
+
+nav .option {
+  border-radius: 999px;
+  color: #d8d8d8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+nav .option:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* ---------- Home: banner ---------- */
+.container-banner {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 77, 46, 0.35), transparent 45%),
+    linear-gradient(rgba(17, 17, 17, 0.55), rgba(17, 17, 17, 0.75)),
+    url("../img/banner-home.jpg") center 35% / cover no-repeat,
+    var(--ink-soft);
+  color: var(--white);
+}
+
+.banner h1 {
+  font-family: var(--font-logo);
+  font-size: clamp(3rem, 11vw, 7rem);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+}
+
+.banner p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #e6e6e6;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.banner .button {
+  display: inline-block;
+  margin-top: 28px;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.banner .button:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--ink);
+}
+
+/* ---------- Home: About us ---------- */
+.about h1 {
+  margin-bottom: 16px;
+}
+
+.about h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: var(--accent);
+}
+
+.about p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+/* ---------- Home: catálogo ---------- */
+.catalog {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.catalog img {
+  transition: transform 0.5s ease;
+}
+
+.catalog::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent 55%);
+  pointer-events: none;
+}
+
+.catalog h2 {
+  z-index: 1;
+  color: var(--white);
+}
+
+.catalog:hover img {
+  transform: scale(1.06);
+}
+
+/* ---------- Contacto ---------- */
+.container-contact {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+.contact-form h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.contact-form h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.contact-social h3 {
+  font-size: 1.1rem;
+}
+
+.contact-social a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--ink);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.contact-social a:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.social-facebook {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M14 8h3V4h-3c-2.8 0-4 1.8-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z'/%3E%3C/svg%3E");
+}
+
+.social-instagram {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='5'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Ccircle cx='17.5' cy='6.5' r='0.6' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.social-gmail {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E");
+}
+
+.contact-link1 h4 {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.contact-link1 small {
+  font-size: 0.95rem;
+}
+
+.contact-link1 a {
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+}
+
+.contact-link1 a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--ink);
+  color: #bdbdbd;
+}
+
+.footer h4 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Catálogo: banner ---------- */
+.banner-products {
+  background:
+    linear-gradient(90deg, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.45) 60%, rgba(17, 17, 17, 0.25) 100%),
+    url("../img/banner-catalogo.jpg") center / cover no-repeat,
+    var(--ink-soft);
+  color: var(--white);
+}
+
+.banner-text h1 {
+  margin-bottom: 10px;
+}
+
+.banner-text p {
+  max-width: 460px;
+  color: #cfcfcf;
+}
+
+/* ---------- Catálogo: filtros ---------- */
+.products-option h1 {
+  font-size: 1.6rem;
+}
+
+.products-option a {
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.products-option a:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* ---------- Catálogo: tarjetas de producto ---------- */
+.box-1 {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.box-1:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.box-1 img {
+  transition: transform 0.5s ease;
+}
+
+.box-1:hover img {
+  transform: scale(1.05);
+}
+
+.box-1 p small {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.box-1 button {
+  font-size: 0.9rem;
+}
+
+/* ---------- Venta ---------- */
+.modulo_pago {
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.modulo_pago figure {
+  border-radius: 8px;
+}
+
+.modulo_pago h3 {
+  margin-bottom: 8px;
+}
+
+.modulo_pago p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.modulo_pago .button {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.modulo_pago .button:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* =====================================================
+   Escritorio / tablet (≥ 768px)
+   ===================================================== */
+@media (min-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px 40px;
+  }
+
+  nav ul {
+    gap: 6px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  nav .option {
+    padding: 8px 16px;
+  }
+
+  .container-banner p br,
+  .container-about p br,
+  .banner-text p br {
+    display: inline;
+  }
+
+  .container-banner {
+    min-height: 80vh;
+  }
+
+  .container-about {
+    padding: 88px 40px;
+  }
+
+  .container-catalog {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 88px;
+  }
+
+  .catalog {
+    aspect-ratio: 3 / 4;
+  }
+
+  .catalog h2 {
+    left: 24px;
+    bottom: 20px;
+  }
+
+  .container-contact {
+    grid-template-columns: 2fr 1fr;
+    gap: 64px;
+    padding: 72px max(40px, calc((100% - 1120px) / 2));
+  }
+
+  .contact-form .form {
+    max-width: 520px;
+  }
+
+  .contact-link1 {
+    padding-top: 12px;
+  }
+
+  .footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 32px;
+    padding: 28px 40px;
+  }
+
+  .banner-products {
+    min-height: 45vh;
+    padding: 64px max(40px, calc((100% - 1200px) / 2));
+  }
+
+  .container-products {
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px 40px 88px;
+  }
+
+  .products-option {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+
+  .products-option ul {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .products-option a {
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    padding: 6px 12px;
+  }
+
+  .products-1 {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .container-venta {
+    padding: 64px 40px 88px;
+  }
+
+  .container-venta .row {
+    gap: 24px;
+    flex-wrap: nowrap;
+  }
+
+  .container-venta .col-4,
+  .container-venta .col-8 {
+    flex: 1 1 0;
+    max-width: none;
+  }
+
+  .container-venta .col-8 {
+    flex-grow: 2;
+  }
+
+  .modulo_pago {
+    padding: 32px;
+  }
+
+  .modulo_pago .button {
+    width: auto;
+    align-self: flex-start;
+  }
+}
+
+/* El footer siempre queda al fondo, aunque la página tenga poco contenido */
+footer {
+  margin-top: auto;
+}

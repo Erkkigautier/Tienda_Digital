@@ -1,0 +1,79 @@
+/*
+ * paypal.css — UrbanShop
+ * Pantallas de resultado del pago:
+ *   .container-paypal → confirmation.html (compra exitosa)
+ *   .container-error  → Error.html (compra fallida)
+ */
+
+.container-paypal,
+.container-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 100vh;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.container-paypal figure,
+.container-error figure {
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  animation: popIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.container-paypal figure {
+  background: rgba(31, 157, 85, 0.12);
+  box-shadow: 0 0 0 10px rgba(31, 157, 85, 0.06);
+}
+
+.container-error figure {
+  background: rgba(214, 69, 69, 0.12);
+  box-shadow: 0 0 0 10px rgba(214, 69, 69, 0.06);
+}
+
+.container-paypal img,
+.container-error img {
+  width: 64px;
+  height: 64px;
+  background: none; /* sin el bloque gris de styles.css */
+}
+
+.container-paypal h3,
+.container-error h3 {
+  max-width: 520px;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  animation: fadeInUp 0.7s 0.2s ease-out both;
+}
+
+.container-paypal h3 { color: var(--ink, #111); }
+.container-error h3  { color: var(--danger, #d64545); }
+
+.container-paypal small,
+.container-error small {
+  font-size: 1rem;
+  color: var(--muted, #6b6b6b);
+  animation: fadeIn 0.8s 0.4s ease-out both;
+}
+
+.container-paypal small a,
+.container-error small a {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--ink, #111);
+  color: var(--white, #fff);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.container-paypal small a:hover,
+.container-error small a:hover {
+  background: var(--accent, #ff4d2e);
+}

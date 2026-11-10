@@ -1,0 +1,277 @@
+/*
+ * mobile.css — UrbanShop
+ * Layout base "mobile-first": así se ve todo en celular.
+ * Se carga ANTES que styles.css, que añade el tema visual y el layout de escritorio
+ * (dentro de @media (min-width: 768px)).
+ */
+
+/* ---------- Navbar ---------- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0 6px;
+}
+
+/* En celular los enlaces van en una sola fila que se desliza de lado */
+nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0 12px 4px;
+  scrollbar-width: none;
+}
+
+nav ul::-webkit-scrollbar {
+  display: none;
+}
+
+nav li {
+  flex: 0 0 auto;
+}
+
+/* centra la fila cuando cabe completa, sin cortar el inicio cuando no cabe */
+nav li:first-child { margin-left: auto; }
+nav li:last-child  { margin-right: auto; }
+
+nav .option {
+  display: inline-block;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+/* ---------- Home: banner ---------- */
+.container-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.container-banner p br,
+.container-about p br,
+.banner-text p br {
+  display: none; /* en celular el texto fluye sin saltos forzados */
+}
+
+/* ---------- Home: About us ---------- */
+.container-about {
+  padding: 56px 16px;
+  text-align: center;
+}
+
+/* ---------- Home: catálogo (Shop / Shoes / Accesory) ---------- */
+.container-catalog {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding: 0 16px 56px;
+}
+
+.catalog {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.catalog img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.catalog h2 {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+}
+
+/* ---------- Contacto (home y catálogo) ---------- */
+.container-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  padding: 48px 16px;
+}
+
+.contact-form .form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form .form br,
+.modulo_pago form br,
+.contact-link1 br {
+  display: none; /* el espaciado lo da el CSS, no los <br> */
+}
+
+.contact-form .form input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.contact-form .form button {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.contact-social h3 {
+  flex-basis: 100%;
+}
+
+.contact-link1 ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 16px;
+  text-align: center;
+}
+
+/* ---------- Catálogo: banner ---------- */
+.banner-products {
+  display: flex;
+  align-items: center;
+  min-height: 40vh;
+  padding: 48px 16px;
+}
+
+/* ---------- Catálogo: filtros + productos ---------- */
+.container-products {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding: 32px 16px 56px;
+}
+
+.products-option ul {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;           /* categorías deslizables en celular */
+  padding: 12px 0 8px;
+  scrollbar-width: thin;
+}
+
+.products-option li {
+  flex: 0 0 auto;
+}
+
+.products-option a {
+  display: inline-block;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+.products-1 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.box-1 {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 14px;
+}
+
+.box-1 figure {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.box-1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box-1 h4,
+.box-1 p {
+  padding: 0 12px;
+}
+
+.box-1 h4 { margin-top: 12px; }
+.box-1 p  { margin: 4px 0 12px; }
+
+.box-1 button {
+  margin: auto 12px 0;
+  padding: 0;
+}
+
+.box-1 button a {
+  display: block;
+  padding: 10px 12px;
+}
+
+/* ---------- Venta ---------- */
+.container-venta {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 16px 56px;
+}
+
+.container-venta .row {
+  margin: 0;
+}
+
+.container-venta [class^="col-"] {
+  padding: 0;
+}
+
+.modulo_pago {
+  height: 100%;
+  padding: 20px;
+}
+
+.modulo_pago figure {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.modulo_pago img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modulo_pago form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modulo_pago .data {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.modulo_pago .button {
+  width: 100%;
+  margin-top: 8px;
+}
