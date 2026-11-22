@@ -1,33 +1,40 @@
 /*
  * styles.css — UrbanShop
- * Tema visual (colores, tipografía, botones, tarjetas) y layout de escritorio.
+ * Tema visual "Lo-Fi zine" (colores, tipografía, botones, tarjetas) y layout de escritorio.
  * El layout para celular está en mobile.css.
  *
- * Fuentes (cargadas desde Google Fonts en cada página):
- *   Permanent Marker → logo
- *   Anton            → títulos
- *   Noto Sans        → texto
+ * Dirección: fanzine fotocopiado. Papel amarillo, fuentes de sistema que chocan
+ * (Times + Helvetica + Courier), elementos rotados fuera de la grilla, cinta adhesiva,
+ * fotos en halftone y desfase de color tipo risografía.
+ *
+ * Gesto principal: las prendas son fotocopias pegadas con cinta a la pared.
+ * Al pasar el mouse, la fotocopia se endereza y se "imprime" a color.
+ *
+ * Fuentes: solo de sistema, sin Google Fonts (no se envía la IP del visitante a terceros).
  */
 
 :root {
-  --ink: #111111;
-  --ink-soft: #2a2a2a;
-  --paper: #f5f3ee;
-  --white: #ffffff;
-  --muted: #6b6b6b;
-  --line: #dedad2;
-  --accent: #ff4d2e;
-  --accent-dark: #d93a1d;
-  --success: #1f9d55;
-  --danger: #d64545;
+  --paper: #e8e0c0;      /* papel amarillo, fondo de todo el sitio */
+  --sheet: #ffffff;      /* hoja fotocopiada (tarjetas, formularios) */
+  --ink: #141414;
+  --muted: #4a4536;      /* texto secundario sobre papel */
+  --line: #141414;
+  --riso-pink: #ff006e;  /* tinta de acento */
+  --riso-teal: #00ffcc;  /* solo para el desfase de color */
+  --success: #1f7a45;
+  --danger: #c4002f;
 
-  --font-logo: "Permanent Marker", "Comic Sans MS", cursive;
-  --font-title: "Anton", "Impact", "Arial Narrow", sans-serif;
-  --font-body: "Noto Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-display: "Times New Roman", Times, serif;
+  --font-body: Helvetica, Arial, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
 
-  --radius: 10px;
-  --shadow: 0 8px 24px rgba(17, 17, 17, 0.08);
-  --shadow-hover: 0 14px 32px rgba(17, 17, 17, 0.16);
+  --misregister: 3px 0 var(--riso-pink), -3px 0 var(--riso-teal);
+  --misregister-sm: 2px 0 var(--riso-pink), -2px 0 var(--riso-teal);
+
+  /* trama de puntos para las fotos */
+  --halftone: radial-gradient(circle at center, rgba(20, 20, 20, 0.32) 1px, transparent 1.7px) 0 0 / 5px 5px;
+  /* movimiento a saltos, como un flipbook: nada de transiciones suaves */
+  --snap: 0.16s steps(2, end);
 }
 
 /* ---------- Base ---------- */
@@ -43,31 +50,35 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-title);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em; /* MAYÚSCULAS: nunca tracking negativo */
+  text-wrap: balance;
+  line-height: 1;
   text-transform: uppercase;
 }
 
-h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  text-shadow: var(--misregister);
+}
 h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
 h3 { font-size: 1.3rem; }
 h4 { font-size: 1rem; font-weight: 700; }
 
 a {
+  color: inherit;
   text-decoration: none;
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--riso-pink);
   outline-offset: 2px;
 }
 
-/* Imagen que aún no existe: se ve un bloque neutro en lugar de un hueco */
+/* Imagen que aún no existe: se ve un bloque de papel gris en lugar de un hueco */
 img {
-  background: linear-gradient(135deg, #d9d5cc, #c4bfb4);
+  background: #b9b39b;
   color: var(--muted);
   font-size: 0.85rem;
 }
@@ -77,26 +88,29 @@ button,
 .button {
   display: inline-block;
   border: 2px solid var(--ink);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--ink);
-  color: var(--white);
-  font-family: var(--font-title);
-  font-size: 1rem;
-  letter-spacing: 0.06em;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 10px 26px;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: transform var(--snap), background-color var(--snap), color var(--snap);
 }
 
 button:hover,
 .button:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--riso-pink);
+  color: var(--ink);
+  transform: rotate(-2deg);
 }
 
 button:active,
 .button:active {
-  transform: translateY(1px);
+  transform: rotate(-2deg) translate(2px, 2px);
 }
 
 button a {
@@ -107,104 +121,145 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 .data {
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
-  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--sheet);
   color: var(--ink);
-  padding: 11px 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 10px 12px;
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
 .data:focus {
-  border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(255, 77, 46, 0.25);
-  outline: none;
+  outline: 3px solid var(--riso-pink);
+  outline-offset: 2px;
 }
 
 label {
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 /* ---------- Navbar ---------- */
 nav {
   background: var(--ink);
-  color: var(--white);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  color: var(--paper);
+  border-bottom: 3px solid var(--riso-pink);
 }
 
 nav .logo {
-  font-family: var(--font-logo);
-  font-size: 1.8rem;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 700;
   line-height: 1;
-  color: var(--white);
+  color: var(--paper);
+  text-shadow: var(--misregister-sm);
+  transform: rotate(-3deg);
 }
 
 nav .option {
-  border-radius: 999px;
-  color: #d8d8d8;
-  font-size: 0.82rem;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: transform var(--snap), background-color var(--snap), color var(--snap);
 }
 
 nav .option:hover {
-  background: var(--accent);
-  color: var(--white);
+  background: var(--riso-pink);
+  color: var(--ink);
+  transform: rotate(-3deg);
 }
 
-/* ---------- Home: banner ---------- */
+/* ---------- Banners: foto en una sola tinta + trama de puntos ---------- */
+.container-banner,
+.banner-products {
+  background-color: var(--riso-pink);
+  background-blend-mode: normal, luminosity;
+  color: var(--ink);
+}
+
 .container-banner {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 77, 46, 0.35), transparent 45%),
-    linear-gradient(rgba(17, 17, 17, 0.55), rgba(17, 17, 17, 0.75)),
-    url("../img/banner-home.jpg") center 35% / cover no-repeat,
-    var(--ink-soft);
-  color: var(--white);
+  background-image: radial-gradient(circle at center, rgba(20, 20, 20, 0.35) 1px, transparent 1.7px),
+    url("../img/banner-home.jpg");
+  background-size: 5px 5px, cover;
+  background-position: 0 0, center 35%;
+  background-repeat: repeat, no-repeat;
+}
+
+.banner-products {
+  background-image: radial-gradient(circle at center, rgba(20, 20, 20, 0.35) 1px, transparent 1.7px),
+    url("../img/banner-catalogo.jpg");
+  background-size: 5px 5px, cover;
+  background-position: 0 0, center;
+  background-repeat: repeat, no-repeat;
+}
+
+/* Títulos de banner: recortes de papel pegados encima de la foto */
+.banner h1,
+.banner-text h1 {
+  display: inline-block;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 6px 18px 2px;
+  transform: rotate(-3deg);
 }
 
 .banner h1 {
-  font-family: var(--font-logo);
   font-size: clamp(3rem, 11vw, 7rem);
-  text-transform: none;
-  letter-spacing: 0;
-  margin-bottom: 16px;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.banner p,
+.banner-text p {
+  background: var(--sheet);
+  border: 2px solid var(--ink);
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
 }
 
 .banner p {
   max-width: 620px;
   margin: 0 auto;
-  color: #e6e6e6;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  transform: rotate(1.5deg);
 }
 
 .banner .button {
-  display: inline-block;
   margin-top: 28px;
-  background: var(--accent);
-  border-color: var(--accent);
+  transform: rotate(-4deg);
 }
 
 .banner .button:hover {
-  background: var(--white);
-  border-color: var(--white);
-  color: var(--ink);
+  background: var(--paper);
+  transform: rotate(0deg);
 }
 
 /* ---------- Home: About us ---------- */
-.about h1 {
-  margin-bottom: 16px;
+.about h2 {
+  display: inline-block;
+  margin-bottom: 20px;
+  transform: rotate(-2deg);
 }
 
-.about h1::after {
+/* subrayado hecho con marcador */
+.about h2::after {
   content: "";
   display: block;
-  width: 64px;
-  height: 4px;
-  margin: 12px auto 0;
-  background: var(--accent);
+  height: 10px;
+  margin-top: 8px;
+  background: var(--riso-pink);
+  transform: rotate(1.5deg) skewX(-20deg);
 }
 
 .about p {
@@ -213,51 +268,96 @@ nav .option:hover {
   color: var(--muted);
 }
 
-/* ---------- Home: catálogo ---------- */
+/* ---------- Cinta adhesiva (reutilizada en tarjetas) ---------- */
+.catalog::before,
+.box-1::before,
+.modulo_pago::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  width: 92px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.55);
+  border-left: 1px dashed rgba(20, 20, 20, 0.25);
+  border-right: 1px dashed rgba(20, 20, 20, 0.25);
+  clip-path: polygon(0 8%, 6% 0, 12% 10%, 20% 0, 28% 8%, 100% 0, 96% 50%, 100% 100%, 90% 92%, 82% 100%, 74% 90%, 0 100%, 4% 50%);
+  pointer-events: none;
+}
+
+/* ---------- Home: catálogo (Shop / Shoes / Accesory) ---------- */
 .catalog {
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+  transition: rotate var(--snap), scale var(--snap);
+}
+
+/* "rotate" y "scale" sueltos (no transform) para no chocar con la animación fadeInUp */
+.catalog:nth-child(1) { rotate: -2.5deg; }
+.catalog:nth-child(2) { rotate: 1.5deg; }
+.catalog:nth-child(3) { rotate: -1deg; }
+
+.catalog::before {
+  top: 10px;
+  transform: translateX(-50%) rotate(-4deg);
 }
 
 .catalog img {
-  transition: transform 0.5s ease;
+  filter: grayscale(1) contrast(1.35);
+  transition: filter var(--snap);
 }
 
+/* trama de puntos encima de la foto */
 .catalog::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent 55%);
+  background: var(--halftone);
+  mix-blend-mode: multiply;
   pointer-events: none;
+  transition: opacity var(--snap);
 }
 
-.catalog h2 {
-  z-index: 1;
-  color: var(--white);
+.catalog h3 {
+  z-index: 2;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 4px 12px 0;
+  color: var(--ink);
+  transform: rotate(-4deg);
+}
+
+.catalog:hover {
+  rotate: 0deg;
+  scale: 1.02;
 }
 
 .catalog:hover img {
-  transform: scale(1.06);
+  filter: none;
+}
+
+.catalog:hover::after {
+  opacity: 0;
 }
 
 /* ---------- Contacto ---------- */
 .container-contact {
-  background: var(--white);
-  border-top: 1px solid var(--line);
+  border-top: 3px dashed var(--ink);
 }
 
-.contact-form h1 {
+.contact-form h2 {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-shadow: var(--misregister-sm);
 }
 
-.contact-form h3 {
-  font-family: var(--font-body);
+.contact-form .form-sub {
+  font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
   color: var(--muted);
-  margin-bottom: 14px;
+  margin: 8px 0 14px;
 }
 
 .contact-social h3 {
@@ -267,17 +367,19 @@ nav .option:hover {
 .contact-social a {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
   background-color: var(--ink);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 22px;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: transform var(--snap), background-color var(--snap);
 }
 
+.contact-social a:nth-of-type(odd)  { transform: rotate(-4deg); }
+.contact-social a:nth-of-type(even) { transform: rotate(3deg); }
+
 .contact-social a:hover {
-  background-color: var(--accent);
-  transform: translateY(-2px);
+  background-color: var(--riso-pink);
+  transform: rotate(0deg);
 }
 
 .social-facebook {
@@ -292,12 +394,11 @@ nav .option:hover {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E");
 }
 
-.contact-link1 h4 {
-  font-family: var(--font-title);
-  font-size: 1.3rem;
-  font-weight: 400;
+.contact-link1 h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
 }
 
 .contact-link1 small {
@@ -305,110 +406,179 @@ nav .option:hover {
 }
 
 .contact-link1 a {
-  color: var(--muted);
-  border-bottom: 1px solid transparent;
+  font-family: var(--font-mono);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 .contact-link1 a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  background: var(--riso-pink);
+  text-decoration: none;
 }
 
 /* ---------- Footer ---------- */
 footer {
   background: var(--ink);
-  color: #bdbdbd;
+  color: var(--paper);
+  border-top: 3px solid var(--riso-pink);
 }
 
-.footer h4 {
-  font-size: 0.8rem;
+.footer p {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
   font-weight: 400;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 /* ---------- Catálogo: banner ---------- */
-.banner-products {
-  background:
-    linear-gradient(90deg, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.45) 60%, rgba(17, 17, 17, 0.25) 100%),
-    url("../img/banner-catalogo.jpg") center / cover no-repeat,
-    var(--ink-soft);
-  color: var(--white);
-}
-
 .banner-text h1 {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .banner-text p {
   max-width: 460px;
-  color: #cfcfcf;
+  transform: rotate(-1deg);
 }
 
 /* ---------- Catálogo: filtros ---------- */
-.products-option h1 {
+.products-option h2 {
   font-size: 1.6rem;
+  text-shadow: var(--misregister-sm);
 }
 
 .products-option a {
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  background: var(--white);
+  border: 2px solid var(--ink);
+  background: var(--sheet);
   color: var(--ink);
+  font-family: var(--font-mono);
   font-size: 0.9rem;
+  transition: transform var(--snap), background-color var(--snap);
 }
 
 .products-option a:hover {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--riso-pink);
+  transform: rotate(-2deg);
 }
 
-/* ---------- Catálogo: tarjetas de producto ---------- */
+/* ---------- Catálogo: tarjetas de producto (fotocopias con cinta) ---------- */
 .box-1 {
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--white);
-  box-shadow: var(--shadow);
-  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+  transition: transform var(--snap);
 }
 
-.box-1:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+.box-1:nth-child(4n + 1) { transform: rotate(-2deg); }
+.box-1:nth-child(4n + 2) { transform: rotate(1.5deg); }
+.box-1:nth-child(4n + 3) { transform: rotate(-1deg); }
+.box-1:nth-child(4n + 4) { transform: rotate(2.5deg); }
+
+.box-1::before {
+  top: -12px;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.box-1:nth-child(even)::before {
+  transform: translateX(-50%) rotate(4deg);
+}
+
+.box-1 figure {
+  position: relative;
+  margin: 10px 10px 0;
+  border: 1px solid var(--ink);
+}
+
+.box-1 figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--halftone);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity var(--snap);
 }
 
 .box-1 img {
-  transition: transform 0.5s ease;
+  filter: grayscale(1) contrast(1.35);
+  transition: filter var(--snap);
+}
+
+.box-1:hover {
+  z-index: 1;
+  transform: rotate(0deg) scale(1.03);
 }
 
 .box-1:hover img {
-  transform: scale(1.05);
+  filter: none;
 }
 
+.box-1:hover figure::after {
+  opacity: 0;
+}
+
+.box-1 h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+/* precio estampado con tinta rosada */
 .box-1 p small {
-  font-size: 1rem;
+  display: inline-block;
+  background: var(--riso-pink);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--accent-dark);
+  padding: 2px 8px;
+  transform: rotate(-2deg);
 }
 
 .box-1 button {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 /* ---------- Venta ---------- */
 .modulo_pago {
-  border-radius: var(--radius);
-  background: var(--white);
-  box-shadow: var(--shadow);
+  position: relative;
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+}
+
+.modulo_pago::before {
+  top: -12px;
+  transform: translateX(-50%) rotate(3deg);
+}
+
+/* la hoja de producto va torcida; la del formulario recta, para que sea fácil de llenar */
+.col-4 .modulo_pago {
+  transform: rotate(-1.5deg);
 }
 
 .modulo_pago figure {
-  border-radius: 8px;
+  position: relative;
+  border: 1px solid var(--ink);
 }
 
+.modulo_pago figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--halftone);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.modulo_pago img {
+  filter: grayscale(1) contrast(1.35);
+}
+
+.modulo_pago h2,
 .modulo_pago h3 {
   margin-bottom: 8px;
+  text-shadow: var(--misregister-sm);
 }
 
 .modulo_pago p {
@@ -417,13 +587,13 @@ footer {
 }
 
 .modulo_pago .button {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--riso-pink);
+  color: var(--ink);
 }
 
 .modulo_pago .button:hover {
   background: var(--ink);
-  border-color: var(--ink);
+  color: var(--paper);
 }
 
 /* =====================================================
@@ -443,7 +613,7 @@ footer {
   }
 
   nav .option {
-    padding: 8px 16px;
+    padding: 8px 14px;
   }
 
   .container-banner p br,
@@ -462,17 +632,17 @@ footer {
 
   .container-catalog {
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 36px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px 88px;
+    padding: 0 40px 96px;
   }
 
   .catalog {
     aspect-ratio: 3 / 4;
   }
 
-  .catalog h2 {
+  .catalog h3 {
     left: 24px;
     bottom: 20px;
   }
@@ -525,14 +695,13 @@ footer {
 
   .products-option a {
     border: none;
-    border-radius: 6px;
     background: transparent;
     padding: 6px 12px;
   }
 
   .products-1 {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 24px;
+    gap: 36px 28px;
   }
 
   .container-venta {
@@ -540,7 +709,7 @@ footer {
   }
 
   .container-venta .row {
-    gap: 24px;
+    gap: 32px;
     flex-wrap: nowrap;
   }
 

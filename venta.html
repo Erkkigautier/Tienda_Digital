@@ -3,72 +3,129 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Noto+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
-    <title>Proceso de Compra</title>
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Carrito y pago — UrbanShop</title>
+    <script src="js/store.js" defer></script>
+    <script src="js/checkout.js" defer></script>
   </head>
   <body>
+    <p class="demo-note">Tienda demo: los precios son de ejemplo y no se realiza ningún cobro.</p>
     <!--Aqui va el navbar-->
     <nav class="fadeInDown">
-      <label class="logo">UrbanShop</label>
+      <a href="index.html" class="logo">UrbanShop</a>
         <ul>
-          <li><a href="index.html" class="option">Home</a></li>
-          <li><a href="index.html#About-us" class="option">About us?</a></li>
-          <li><a href="catalog.html" class="option">Catalog</a></li>
-          <li><a href="venta.html" class="option">Buy</a></li>
-          <li><a href="index.html#contactus" class="option">Contact us</a></li>
+          <li><a href="index.html" class="option">Inicio</a></li>
+          <li><a href="index.html#nosotros" class="option">Nosotros</a></li>
+          <li><a href="catalog.html" class="option">Catálogo</a></li>
+          <li><a href="venta.html" class="option" aria-current="page">Carrito (<span data-cart-count>0</span>)</a></li>
+          <li><a href="index.html#contacto" class="option">Contacto</a></li>
         </ul>
     </nav>
-    <!--Aqui va el Formulario Venta-->
-    <div class="container-venta">
+    <!--Aqui va el carrito y el pago-->
+    <main class="container-venta">
+      <h1 class="visually-hidden">Carrito y pago</h1>
       <div class="row">
+        <!-- Resumen del pedido -->
         <div class="col-4">
-          <div class="modulo_pago">
-            <figure>
-              <img src="img/venta.jpg" alt="Imagen de Venta">
-            </figure>
-            <h3>Productos</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
+          <section class="modulo_pago order-summary" aria-labelledby="summary-title">
+            <h2 id="summary-title">Tu pedido</h2>
+            <ul id="cart-lines" class="cart-lines"></ul>
+            <p id="cart-empty" class="cart-empty" hidden>Tu carrito está vacío. <a href="catalog.html">Ver catálogo</a></p>
+            <dl class="totals">
+              <div><dt>Subtotal</dt><dd id="sum-subtotal">S/ 0.00</dd></div>
+              <div><dt>Envío</dt><dd id="sum-shipping">S/ 0.00</dd></div>
+              <div class="totals-grand"><dt>Total</dt><dd id="sum-total">S/ 0.00</dd></div>
+            </dl>
+          </section>
         </div>
+        <!-- Datos y método de pago -->
         <div class="col-8">
           <div class="modulo_pago">
-            <form class="" action="index.html" method="post">
-              <label for="name">Nombre:</label>
-              <br>
-              <input type="text" placeholder="" name="name" class="data">
-              <br>
-              <label for="email">Email:</label>
-              <br>
-              <input type="text" placeholder="" name="mail" class="data">
-              <br>
-              <label for="phone">Telefono:</label>
-              <br>
-              <input type="text" placeholder="" name="phone" class="data">
-              <br>
-              <input type="submit" class="button" name="submit" value="Confirmar Pago">
+            <form id="checkout-form" class="checkout-form" novalidate>
+              <fieldset>
+                <legend>Contacto</legend>
+                <label for="buyer-name">Nombre completo</label>
+                <input type="text" id="buyer-name" class="data" autocomplete="name" required>
+                <label for="buyer-email">Email</label>
+                <input type="email" id="buyer-email" class="data" autocomplete="email" spellcheck="false" placeholder="nombre@correo.com" required>
+                <label for="buyer-phone">Teléfono</label>
+                <input type="tel" id="buyer-phone" class="data" autocomplete="tel" pattern="[0-9 +()-]{7,20}" title="Solo números, espacios, +, ( ) y -" required>
+              </fieldset>
+
+              <fieldset>
+                <legend>Envío</legend>
+                <label for="ship-address">Dirección</label>
+                <input type="text" id="ship-address" class="data" autocomplete="street-address" required>
+                <label for="ship-district">Distrito</label>
+                <input type="text" id="ship-district" class="data" autocomplete="address-level3" required>
+              </fieldset>
+
+              <fieldset class="pay-methods">
+                <legend>Método de pago</legend>
+                <div class="method-tabs">
+                  <label class="method-tab"><input type="radio" name="method" value="card" checked> Tarjeta</label>
+                  <label class="method-tab"><input type="radio" name="method" value="wallet"> Yape / Plin</label>
+                  <label class="method-tab"><input type="radio" name="method" value="paypal"> PayPal</label>
+                </div>
+
+                <!-- Tarjeta: sin atributo name, estos datos nunca se envían -->
+                <fieldset data-panel="card" class="method-panel">
+                  <legend class="visually-hidden">Datos de la tarjeta</legend>
+                  <label for="card-holder">Nombre en la tarjeta</label>
+                  <input type="text" id="card-holder" class="data" autocomplete="cc-name" autocapitalize="characters" spellcheck="false" required>
+                  <label for="card-number">Número de tarjeta <span id="card-brand" class="card-brand"></span></label>
+                  <input type="text" id="card-number" class="data" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+                  <div class="field-pair">
+                    <div>
+                      <label for="card-expiry">Vencimiento</label>
+                      <input type="text" id="card-expiry" class="data" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/AA" required>
+                    </div>
+                    <div>
+                      <label for="card-cvv">CVV</label>
+                      <input type="text" id="card-cvv" class="data" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123" required>
+                    </div>
+                  </div>
+                  <p class="hint">Visa, Mastercard, American Express o Diners Club. Para probar un rechazo usa 4000 0000 0000 0002.</p>
+                </fieldset>
+
+                <!-- Billeteras digitales -->
+                <fieldset data-panel="wallet" class="method-panel" hidden disabled>
+                  <legend class="visually-hidden">Billetera digital</legend>
+                  <div class="wallet-choice">
+                    <label><input type="radio" name="wallet" value="Yape" checked> Yape</label>
+                    <label><input type="radio" name="wallet" value="Plin"> Plin</label>
+                  </div>
+                  <label for="wallet-phone">Celular registrado en la billetera</label>
+                  <input type="tel" id="wallet-phone" class="data" inputmode="numeric" autocomplete="tel-national" maxlength="9" placeholder="9XXXXXXXX" required>
+                  <p class="hint">En una tienda real recibirías la solicitud de pago en tu app para aprobarla.</p>
+                </fieldset>
+
+                <!-- PayPal -->
+                <fieldset data-panel="paypal" class="method-panel" hidden disabled>
+                  <legend class="visually-hidden">PayPal</legend>
+                  <p class="hint">Al pagar, en una tienda real te llevaríamos a PayPal para iniciar sesión y aprobar el pago.</p>
+                </fieldset>
+              </fieldset>
+
+              <p id="form-error" class="form-error" role="alert"></p>
+              <button type="submit" id="pay-button" class="button pay-button">Pagar</button>
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <!--Aqui va el pie de Pagina-->
     <footer>
       <div class="footer">
-        <h4>Política de Privacidad</h4>
-        <h4>Términos de Uso</h4>
-        <h4>Mapa del Sitio</h4>
-        <h4>Ley de Transparencia de CA</h4>
-        <h4>Región: Lima,Perú</h4>
+        <p>UrbanShop · Lima, Perú</p>
+        <p><a href="catalog.html">Catálogo</a></p>
+        <p><a href="venta.html">Carrito</a></p>
       </div>
     </footer>
   </body>
