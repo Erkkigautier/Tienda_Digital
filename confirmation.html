@@ -3,25 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/paypal.css">
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Noto+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
-    <title>Confirmación</title>
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Compra confirmada — UrbanShop</title>
+    <script src="js/store.js" defer></script>
+    <script src="js/order.js" defer></script>
   </head>
   <body>
+    <p class="demo-note">Tienda demo: los precios son de ejemplo y no se realiza ningún cobro.</p>
     <div class="container-paypal">
       <figure>
-        <img src="img/check.svg" alt="Imagen de Box">
+        <img src="img/check.svg" alt="">
       </figure>
-      <h3>!Yay¡ Tu compra se realizó con éxito</h3>
-      <small><a href="index.html">Haz click aqui</a> para ir al Home</small>
+      <h1>¡Yay! Tu compra se realizó con éxito</h1>
+      <div id="order-details" class="order-details" hidden></div>
+      <small><a href="catalog.html">Seguir comprando</a> <a href="index.html">Ir al inicio</a></small>
     </div>
   </body>
 </html>

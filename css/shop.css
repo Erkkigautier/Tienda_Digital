@@ -1,0 +1,437 @@
+/*
+ * shop.css — UrbanShop
+ * Catálogo con carrito, checkout y recibo. Usa los tokens "Lo-Fi zine" de styles.css.
+ * Se carga después de styles.css.
+ */
+
+/* ---------- Aviso de tienda demo ---------- */
+.demo-note {
+  margin: 0;
+  padding: 6px 16px;
+  background: var(--riso-pink);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Catálogo: filtros por categoría ---------- */
+.products-option button {
+  display: inline-block;
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+.products-option button:hover {
+  background: var(--riso-pink);
+  color: var(--ink);
+  transform: rotate(-2deg);
+}
+
+.products-option button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.cart-status {
+  min-height: 1.6em;
+  margin: 0 0 18px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.cart-status a {
+  background: var(--riso-pink);
+  padding: 0 6px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ---------- Catálogo: tarjeta con talla y botón ---------- */
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 0 12px;
+}
+
+.add-form label {
+  font-size: 0.8rem;
+}
+
+.add-form select {
+  flex: 1 1 auto;
+  min-width: 64px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  padding: 6px 8px;
+}
+
+.box-1 .add-to-cart {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+}
+
+/* ---------- Checkout: resumen tipo ticket ---------- */
+.order-summary {
+  font-family: var(--font-mono);
+}
+
+.cart-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 14px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-line {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 10px;
+  align-items: start;
+  padding-bottom: 14px;
+  border-bottom: 2px dashed var(--ink);
+}
+
+.cart-line img {
+  width: 56px;
+  height: 72px;
+  object-fit: cover;
+  border: 1px solid var(--ink);
+  filter: grayscale(1) contrast(1.35);
+}
+
+.cart-line-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.85rem;
+}
+
+.cart-line-info strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.cart-line-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.cart-line-qty label {
+  font-size: 0.75rem;
+}
+
+.cart-line-qty input {
+  width: 3.4em;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--sheet);
+  font-family: var(--font-mono);
+  padding: 2px 4px;
+}
+
+.cart-line-total {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* botón que se ve como enlace (Quitar) */
+.link-button,
+.link-button:hover,
+.link-button:active {
+  border: none;
+  background: none;
+  color: var(--ink);
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-decoration: underline;
+  text-transform: none;
+  transform: none;
+}
+
+.link-button:hover {
+  background: var(--riso-pink);
+}
+
+.cart-empty {
+  margin: 14px 0;
+}
+
+.cart-empty a {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.totals {
+  margin: 0;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.totals dd {
+  margin: 0;
+}
+
+.totals-grand {
+  margin-top: 6px;
+  border-top: 3px double var(--ink);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* ---------- Checkout: formulario ---------- */
+.checkout-form fieldset {
+  margin: 0 0 18px;
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+
+.checkout-form > fieldset > legend {
+  display: inline-block;
+  margin-bottom: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 12px;
+  transform: rotate(-2deg);
+}
+
+.checkout-form label {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.checkout-form .data {
+  width: 100%;
+}
+
+.checkout-form .data:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--danger);
+}
+
+.field-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card-brand {
+  margin-left: 6px;
+  background: var(--riso-pink);
+  padding: 0 6px;
+}
+
+.card-brand:empty {
+  display: none;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* pestañas de método de pago: radios con aspecto de recorte */
+.method-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.checkout-form .method-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: transform var(--snap), background-color var(--snap);
+}
+
+.method-tab:hover {
+  transform: rotate(-2deg);
+}
+
+.method-tab:has(input:checked) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.method-tab:has(input:focus-visible) {
+  outline: 3px solid var(--riso-pink);
+  outline-offset: 2px;
+}
+
+.method-tab input {
+  accent-color: var(--riso-pink);
+}
+
+.method-panel {
+  border: 2px dashed var(--ink) !important;
+  padding: 14px !important;
+}
+
+.wallet-choice {
+  display: flex;
+  gap: 18px;
+}
+
+.checkout-form .wallet-choice label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.form-error {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.pay-button:disabled {
+  background: var(--muted);
+  color: var(--paper);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Confirmación / error: recibo ---------- */
+.order-details {
+  width: 100%;
+  max-width: 420px;
+}
+
+.receipt {
+  margin: 0;
+  padding: 16px;
+  list-style: none;
+  border: 2px solid var(--ink);
+  background: var(--sheet);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-align: left;
+  rotate: 1deg;
+}
+
+.receipt li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--ink);
+}
+
+.receipt li:last-child {
+  border-bottom: none;
+}
+
+/* en las páginas de resultado el aviso demo ocupa espacio arriba */
+.demo-note + .container-paypal,
+.demo-note + .container-error {
+  min-height: calc(100vh - 32px);
+}
+
+/* "hidden" debe ganar a los display:flex del layout (filtros del catálogo) */
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Detalles de oficio (guía Refero: craft-details) ---------- */
+
+/* sin retraso de 300 ms al tocar en celular; resaltado de toque intencional */
+a, button, label, select, input {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(255, 0, 110, 0.25);
+}
+
+/* los anclas (#nosotros, #contacto) no quedan tapados por el menú fijo */
+[id] {
+  scroll-margin-top: 110px;
+}
+
+.about h2 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+/* el menú marca la página actual */
+nav .option[aria-current="page"] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* accesos del home: toda la foto es un enlace */
+a.catalog {
+  display: block;
+  color: var(--ink);
+}
+
+.form-status {
+  min-height: 1.4em;
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer a:hover {
+  background: var(--riso-pink);
+  color: var(--ink);
+}
+
+.footer p {
+  margin: 0;
+}

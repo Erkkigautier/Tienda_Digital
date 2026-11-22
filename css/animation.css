@@ -29,15 +29,15 @@
 }
 
 .fadeIn {
-  animation: fadeIn 1.2s ease-out both;
+  animation: fadeIn 1.2s steps(3, end) both;
 }
 
 .fadeInDown {
-  animation: fadeInDown 0.7s ease-out both;
+  animation: fadeInDown 0.7s steps(3, end) both;
 }
 
 .fadeInUp {
-  animation: fadeInUp 0.8s ease-out both;
+  animation: fadeInUp 0.8s steps(3, end) both;
 }
 
 /* Las tarjetas del catálogo aparecen una tras otra */
@@ -45,7 +45,7 @@
 .fadeInUp:nth-child(3) { animation-delay: 0.3s; }
 
 .popIn {
-  animation: popIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  animation: popIn 0.6s steps(3, end) both;
 }
 
 /* Respeta a quienes prefieren menos movimiento */

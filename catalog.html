@@ -3,184 +3,84 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Noto+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
-    <title>Catálogo</title>
+    <link rel="stylesheet" href="css/shop.css">
+    <title>Catálogo — UrbanShop</title>
+    <script src="js/store.js" defer></script>
+    <script src="js/catalog.js" defer></script>
   </head>
   <body>
+    <p class="demo-note">Tienda demo: los precios son de ejemplo y no se realiza ningún cobro.</p>
     <!--Aqui va el navbar-->
     <nav class="fadeInDown">
-      <label class="logo">UrbanShop</label>
+      <a href="index.html" class="logo">UrbanShop</a>
         <ul>
-          <li><a href="index.html" class="option">Home</a></li>
-          <li><a href="index.html#About-us" class="option">About us?</a></li>
-          <li><a href="catalog.html" class="option">Catalog</a></li>
-          <li><a href="venta.html" class="option">Buy</a></li>
-          <li><a href="#contactus" class="option">Contact us</a></li>
+          <li><a href="index.html" class="option">Inicio</a></li>
+          <li><a href="index.html#nosotros" class="option">Nosotros</a></li>
+          <li><a href="catalog.html" class="option" aria-current="page">Catálogo</a></li>
+          <li><a href="venta.html" class="option">Carrito (<span data-cart-count>0</span>)</a></li>
+          <li><a href="index.html#contacto" class="option">Contacto</a></li>
         </ul>
     </nav>
     <!--Aqui va el banner-->
-    <!-- <section>
-        <div class="container">
-          <h1>Hola</h1>
-          <div class="row">+
-            <div class="col-2"> HOLA</div>
-            <div class="col-2"> HOLA</div>
-            <div class="col-2"> HOLA</div>
-            <div class="col-2"> HOLA</div>
-            <div class="col-2"> HOLA</div>
-            <div class="col-2"> HOLA</div>
-          </div>
-        </div> -->
-        <div class="banner-products">
-          <article class="banner-text">
-            <h1>Catálogo</h1>
-            <p>Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit, <br> sed do eiusmod tempor incididunt ut <br> labore et dolore magna aliqua.</p>
-          </div>
-          </article>
-        <div class="container-products">
-          <div class="products-option">
-            <h1>Catálogo</h1>
-            <ul>
-              <li><a href="#">Polo</a></li>
-              <li><a href="#">Zapatillas</a></li>
-              <li><a href="#">Sweatshirt</a></li>
-              <li><a href="#">Pantalones</a></li>
-              <li><a href="#">Shorts</a></li>
-              <li><a href="#">Buzos</a></li>
-              <li><a href="#">Poleras</a></li>
-              <li><a href="#">Vestidos</a></li>
-              <li><a href="#">Joggers</a></li>
-              <li><a href="#">Casacas</a></li>
-              <li><a href="#">Medias</a></li>
-              <li><a href="#">Ver más...</a></li>
-            </ul>
-          </div>
-          <div class="products-1">
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto1.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto2.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto3.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto4.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto5.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto6.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto7.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto8.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-            <div class="box-1">
-              <figure>
-                <img loading="lazy" src="img/foto9.jpg" alt="Ropa">
-              </figure>
-              <h4>Especificaciones</h4>
-              <p><small>Precio: S/ 80.00</small></p>
-              <button type="button" name="button"><a href="venta.html">Comprar</a></button>
-            </div>
-          </div>
+    <div class="banner-products">
+      <article class="banner-text">
+        <h1>Catálogo</h1>
+        <p>Casacas, polos, poleras, buzos, joggers y pantalones. Elige tu talla, agrégala al carrito y paga con tarjeta, Yape, Plin o PayPal.</p>
+      </article>
+    </div>
+    <main class="container-products">
+      <div class="products-option">
+        <h2>Categorías</h2>
+        <ul id="category-filters"></ul>
+      </div>
+      <div>
+        <p id="cart-status" class="cart-status" role="status" aria-live="polite"></p>
+        <noscript><p class="cart-status">Activa JavaScript para ver el catálogo y comprar.</p></noscript>
+        <div class="products-1" id="product-grid"></div>
+      </div>
+    </main>
+    <!--Aqui va el formulario-->
+    <section class="container-contact" id="contacto">
+      <div class="contact-form">
+        <form class="form newsletter-form">
+          <h2>Descuentos y promociones</h2>
+          <p class="form-sub">Déjanos tu correo y te avisamos de cada nuevo drop.</p>
+          <label for="name">Nombres</label>
+          <input type="text" id="name" name="name" autocomplete="given-name" required>
+          <label for="lastname">Apellidos</label>
+          <input type="text" id="lastname" name="lastname" autocomplete="family-name" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" spellcheck="false" placeholder="nombre@correo.com" required>
+          <button type="submit">Suscribirme</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="contact-social">
+          <h3>Síguenos</h3>
+          <a href="https://www.facebook.com/erkkigautier" class="social-facebook" aria-label="Facebook"></a>
+          <a href="https://www.instagram.com/erkkigautier/" class="social-instagram" aria-label="Instagram"></a>
+          <a href="mailto:info.urbanshop@urbanshop.com.pe" class="social-gmail" aria-label="Email"></a>
         </div>
-      <!--Aqui va el formulario-->
-        <div class="container-contact" id="contactus">
-          <div class="contact-form">
-            <form class="form" action="index.html" method="post">
-              <h1>Formulario de Contacto</h1>
-              <h3>Obtén descuentos y promociones</h3>
-              <label for="name">Nombres:</label> <br>
-              <input type="text" name="name" value=""> <br>
-              <label for="lastname">Apellidos:</label> <br>
-              <input type="text" name="lastname" value=""> <br>
-              <label for="">Email:</label> <br>
-              <input type="text" name="email" value=""> <br>
-              <button type="submit" name="button">Contact us</button>
-            </form>
-            <div class="contact-social">
-              <h3>Siguenos:</h3>
-              <a href="https://www.facebook.com/erkkigautier" class="social-facebook"></a>
-              <a href="https://www.instagram.com/erkkigautier/" class="social-instagram"></a>
-              <a href="#" class="social-gmail"></a>
-            </div>
-          </div>
-          <div class="contact-link1">
-                <h4>Escríbenos a:</h4>
-              <small>
-                <ul>
-                  <li><a href="#">info.urbanshop@urbanshop.com.pe</a></li> <br>
-                  <li><a href="#">Contactenos</a></li> <br>
-                  <li><a href="#">Mis pedidos</a></li>
-                </ul>
-              </small>
-            </div>
-        </div>
+      </div>
+      <div class="contact-link1">
+        <h3>Escríbenos</h3>
+        <ul>
+          <li><a href="mailto:info.urbanshop@urbanshop.com.pe">info.urbanshop@urbanshop.com.pe</a></li>
+          <li><a href="venta.html">Tu carrito</a></li>
+        </ul>
+      </div>
     </section>
 
     <!--Aqui va el pie de Pagina-->
     <footer>
       <div class="footer">
-        <h4>Política de Privacidad</h4>
-        <h4>Términos de Uso</h4>
-        <h4>Mapa del Sitio</h4>
-        <h4>Ley de Transparencia de CA</h4>
-        <h4>Región: Lima,Perú</h4>
+        <p>UrbanShop · Lima, Perú</p>
+        <p><a href="catalog.html">Catálogo</a></p>
+        <p><a href="venta.html">Carrito</a></p>
       </div>
     </footer>
   </body>
